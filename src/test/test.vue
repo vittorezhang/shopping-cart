@@ -1,3 +1,3 @@
 <template>
-    <div>hellow</div>
+    <div>hellow vue</div>
 </template>

@@ -1,3 +1,4 @@
+@import url("../styles/global.less");
 // headBar 样式
 .headBar-wapper {
    
@@ -18,8 +19,18 @@
     }
 
   }
+//食物分类样式
+.my-swipe{
+  .van-swipe__indicator{
+    width: 10px;
+    height: 10px;
+    background-color:gray;
+  }
+  .van-swipe__indicator--active{
+    background-color: @globalColor;
+  }
 
-
+}
 //tarbar样式
 .tarBar{
   .van-tabbar-item__icon{

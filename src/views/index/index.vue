@@ -1,6 +1,6 @@
 <template>
   <div class="index-wapper">
-    <router-view></router-view>
+    <router-view class="router-wapper"></router-view>
     <tar-bar :route="true"></tar-bar>
   </div>
 </template>
@@ -15,5 +15,13 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less" scope>
+.index-wapper{
+  height: 100%;
+  background-color: #eee;
+  .router-wapper{
+    padding-bottom:70px;
+    box-sizing: border-box;
+  }
+}
 </style>

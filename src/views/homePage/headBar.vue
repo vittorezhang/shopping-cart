@@ -18,7 +18,6 @@
 
 <script>
 import { locationApi } from "../../request/index";
-
 export default {
   data() {
     return {
@@ -61,19 +60,18 @@ export default {
     }
   },
 
-  created() {
+  created() {//此时已经可以访问方法和data
     this.getLoaction();
   },
-  mounted() {},
-  updated() {}
 };
 </script>
 
 <style lang="less" scoped>
+@import url("../../assets/styles/global.less");
 .headBar-wapper {
   height: 70px;
   line-height: 60px;
-  background-color: #1989fa;
+  background-color: @globalColor;
   .login-flag {
     margin: 0 8px;
   }

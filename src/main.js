@@ -3,8 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import 'lib-flexible/flexible'
-import './plugin/elements';
+import 'lib-flexible/flexible';
+import "./plugin/vant";
 
 
 Vue.config.productionTip = false

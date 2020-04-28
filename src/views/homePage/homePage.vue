@@ -1,10 +1,11 @@
 <template>
   <div>
-    <el-button type="primary">按键</el-button>
+    <van-button type="info">12345</van-button>
   </div>
 </template>
 
 <script>
+
 export default {};
 </script>
 

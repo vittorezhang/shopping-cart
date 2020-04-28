@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <p>导航栏页面</p>
-    <p>1111</p>
+    <p>作业测试</p>
     <router-view />
   </div>
 </template>

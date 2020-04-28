@@ -1,13 +1,19 @@
 <template>
-  <div>
-    <van-button type="info">12345</van-button>
+  <div class="homePage-wapper">
+    <head-nav></head-nav>
   </div>
 </template>
 
 <script>
-
-export default {};
+import headNav from "./headBar.vue"
+export default {
+  components:{
+    headNav
+  }
+};
 </script>
 
-<style>
+<style lang='less' scoped>
+.homePage-wapper {
+}
 </style>

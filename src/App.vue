@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <router-view />
-    <tar-bar></tar-bar>
   </div>
 </template>
 
@@ -18,6 +17,6 @@ export default {
 @import url("./assets/styles/reset.less");
 #app {
   height: 100vh;
-  font-size: 40px;
+  font-size: initial;
 }
 </style>

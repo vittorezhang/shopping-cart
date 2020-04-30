@@ -11,7 +11,7 @@
     <van-tabbar-item
       replace
       class="iconfont"
-      to="/search"
+      to="/home/search"
       icon-prefix="icon"
       name="search"
       icon="compass"
@@ -19,7 +19,7 @@
     <van-tabbar-item
       replace
       class="iconfont"
-      to="/order"
+      to="/home/order"
       icon-prefix="icon"
       name="order"
       icon="order"
@@ -27,7 +27,7 @@
     <van-tabbar-item
       replace
       class="iconfont"
-      to="/user"
+      to="/home/user"
       icon-prefix="icon"
       name="user"
       icon="wode"
@@ -36,8 +36,11 @@
 </template>
 
 <script>
-import "../../assets/fonts/iconfont";
 export default {
+  props: {
+    //关闭路由模式
+    route: false
+  },
   data() {
     return {
       active: "home"

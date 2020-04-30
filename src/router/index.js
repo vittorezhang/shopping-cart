@@ -6,24 +6,30 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    component: () => import("../views/homePage/homePage.vue"),
-
+    redirect: "/home"
   },
   {
     path: '/home',
-    component: () => import("../views/homePage/homePage.vue"),
-  },
-  {
-    path: '/search',
-    component: () => import("../views/search/search.vue"),
-  },
-  {
-    path: '/order',
-    component: () => import("../views/order/order.vue"),
-  },
-  {
-    path: '/user',
-    component: () => import("../views/user/user.vue"),
+    component: () => import("../views/home/home.vue"),
+
+    children: [
+      {
+        path: '',
+        component: () => import("../views/homePage/homePage.vue"),
+      },
+      {
+        path: 'search',
+        component: () => import("../views/search/search.vue"),
+      },
+      {
+        path: 'order',
+        component: () => import("../views/order/order.vue"),
+      },
+      {
+        path: 'user',
+        component: () => import("../views/user/user.vue"),
+      },
+    ],
   }
 ]
 

@@ -1,12 +1,12 @@
 const px2rem = require('postcss-px2rem');
 
 module.exports = {
-  //配置UI渲染
+  //Webpack Plugin配置
   chainWebpack: config => {
     config
       .plugin('html')
       .tap(args => {
-        args[0].title = 'ele'
+        args[0].title = 'vue-mobile'
         return args;
       })
   },

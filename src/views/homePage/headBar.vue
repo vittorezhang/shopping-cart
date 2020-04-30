@@ -69,7 +69,7 @@ export default {
 <style lang="less" scoped>
 @import url("../../assets/styles/global.less");
 .headBar-wapper {
-  height: 70px;
+  height: 80px;
   line-height: 60px;
   background-color: @globalColor;
   .login-flag {

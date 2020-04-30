@@ -27,7 +27,7 @@ export default {
 <style lang="less" scoped>
 @import url("../../assets/fonts/iconfont.css");
 .tarBar {
-  height: 70px;
+  height: 100px;
  
 }
 </style>

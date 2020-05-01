@@ -17,6 +17,7 @@
 </template>
 
 <script>
+//请求位置数据
 import { locationApi } from "../../request/index";
 import { Toast } from "vant";
 export default {

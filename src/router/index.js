@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+//注册路由插件
 Vue.use(VueRouter)
 
 const routes = [
@@ -29,7 +30,11 @@ const routes = [
         path: 'user',
         component: () => import("../views/user/user.vue"),
       },
-    ],
+    ]
+  },
+  {
+    path: '*',
+    component: () => import("../views/err/err.vue"),
   }
 ]
 

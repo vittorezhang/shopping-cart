@@ -54,6 +54,7 @@ export default {
               userLocationInfo.point.lat + "," + userLocationInfo.point.lng
             ).then(res => {
               _this.userLocation = res.data.name;
+              console.log(res.data)
             });
           } else {
             locationApi(userLocationInfo.lat, userLocationInfo.lng);

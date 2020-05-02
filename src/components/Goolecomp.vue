@@ -3,6 +3,7 @@
     <router-view class="router-view"></router-view>
     <tar-bar ></tar-bar>
   </div>
+  
 </template>
 
 <script>

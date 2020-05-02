@@ -1,0 +1,58 @@
+@import "./global.less";
+// 底部图标的样式
+.tarBar {
+    .van-tabbar-item__icon{
+        i{
+            font-size: 30px;
+        }
+    }
+}
+
+// 搜索的头部样式
+.hometitle {
+    .van-icon-search {
+        font-size: 20px !important;
+        /*no*/
+        color    : #FFF !important;
+      }
+    
+      .van-nav-bar__title {
+        max-width  : 50%;
+        line-height: 80px;
+        color      : #FFF;
+        font-size  : 18px;
+        /*no*/
+      }
+    
+      .van-nav-bar__right {
+        .van-nav-bar__text{
+            color      : #FFF;
+        }
+        font-size: 14px;
+        /*no*/
+      }
+  }
+  
+  .my-swipe {
+    .van-swipe__indicator {
+      width           : 10px;
+      height          : 10px;
+      background-color: gray;
+    }
+  
+    .van-swipe__indicator--active {
+      background-color: @globalColor;
+    }
+  
+    .van-grid-item__text {
+      line-height: 20px;
+    }
+  }
+//   轮播样式
+.my-swipe .van-swipe {
+    .van-swipe__indicators{
+        .van-swipe__indicator{
+            background-color: #1989fa;
+        }
+    }
+}

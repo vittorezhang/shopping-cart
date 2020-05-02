@@ -5,7 +5,7 @@ import store from './store'
 import 'lib-flexible/flexible'
 
 Vue.config.productionTip = false
-
+import "./Vant/gooesVant"
 new Vue({
   router,
   store,

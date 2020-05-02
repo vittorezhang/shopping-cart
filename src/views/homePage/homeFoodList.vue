@@ -4,22 +4,17 @@
     <van-swipe-item v-for="(value,index) in foodTypeList" :key="index">
       <home-grid :dataList="value"></home-grid>
     </van-swipe-item>
-
-     <!-- //第二页 -->
-    <!--<van-swipe-item>
-      <home-grid></home-grid>
-    </van-swipe-item>-->
-  </van-swipe> 
+  </van-swipe>
 </template>
 
 <script>
-import { foodListApi } from "../../request/index";
 import homeGrid from "./homeGrid";
+import { foodListApi } from "../../request/index";
+import Bus from "./bus";
 export default {
   data() {
     return {
-      foodTypeList: [],
-      
+      foodTypeList: []
     };
   },
   components: {
@@ -27,10 +22,15 @@ export default {
   },
   created() {
     this.getFoodList();
+    let that = this;
+    Bus.$on("my-refresh", function() {
+      that.getFoodList();
+    });
   },
   methods: {
     getFoodList() {
       foodListApi("").then(res => {
+        if (res.data.status == 0) Toast("刷新失败,请检查网络");
         this.foodTypeList = this.sliceArr(res.data, 8);
       });
     },
@@ -46,7 +46,7 @@ export default {
         //结束位置
         itemNum =
           itemNum + itemNum > array.length ? array.length : itemNum + itemNum;
-      }    
+      }
       return tempArr;
     }
   }

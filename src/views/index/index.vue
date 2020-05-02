@@ -20,7 +20,7 @@ export default {
   height: 100%;
   background-color: #eee;
   .router-wapper{
-    padding-bottom:70px;
+    padding-bottom:100px;
     box-sizing: border-box;
   }
 }

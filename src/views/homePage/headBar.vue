@@ -18,12 +18,14 @@
 
 <script>
 import { locationApi } from "../../request/index";
+import Bus from "./bus";
 export default {
   data() {
     return {
       userLoaction: "定位中"
     };
   },
+
   methods: {
     onClickLeft() {
       Toast("返回");
@@ -31,6 +33,8 @@ export default {
     onClickRight() {},
     //定位设置用户位置
     getLoaction() {
+
+
       let that = this;
       var geolocation = new BMap.Geolocation();
       //用户定位信息
@@ -44,11 +48,14 @@ export default {
             userLocationInfo = {
               flag: true,
               point: { lng: r.point.lng, lat: r.point.lat }
+
             };
             //请求位置
             locationApi(
               userLocationInfo.point.lat + "," + userLocationInfo.point.lng
             ).then(res => {
+              if(res.data.status == 0)Toast("获取位置失败,请检查");
+              
               that.userLoaction = res.data.name;
             });
           } else {
@@ -60,9 +67,17 @@ export default {
     }
   },
 
-  created() {//此时已经可以访问方法和data
+  created() {
+    //此时已经可以访问方法和data
+    let that = this;
     this.getLoaction();
-  },
+
+    Bus.$on("my-refresh", function() {
+      that.userLoaction = "正在重新定位";
+      that.getLoaction();
+    });
+  
+  }
 };
 </script>
 

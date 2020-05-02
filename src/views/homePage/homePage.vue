@@ -1,17 +1,42 @@
 <template>
   <div class="homePage-wapper">
-    <head-nav></head-nav>
-    <home-food-list></home-food-list>
+    <!-- <van-pull-refresh v-model="isLoading" success-text="刷新成功" @refresh="onRefresh"> -->
+      <head-nav ></head-nav>
+      <home-food-list></home-food-list>
+      <home-store-list></home-store-list>
+    <!-- </van-pull-refresh> -->
   </div>
 </template>
 
 <script>
-import headNav from "./headBar.vue"
-import homeFoodList from "./homeFoodList"
+import HeadNav from "./headBar.vue";
+import HomeFoodList from "./homeFoodList";
+import HomeStoreList from "./homeStoreList"
+import Bus from "./bus";
 export default {
-  components:{
-    headNav,
-    homeFoodList
+  data() {
+    return {
+      isLoading: false,
+      
+    };
+  },
+
+  components: {
+    HeadNav,
+    HomeFoodList,
+    HomeStoreList
+  },
+
+
+  methods: {
+    onRefresh() {
+      let that = this;      
+      Bus.$emit("my-refresh");
+      setTimeout(()=>{
+        that.isLoading = false;
+      },2000)
+    },
+  
   }
 };
 </script>
@@ -19,6 +44,5 @@ export default {
 <style lang='less' scoped>
 .homePage-wapper {
   height: 100%;
- 
 }
 </style>

@@ -1,12 +1,12 @@
 import Axios from "axios";
 
 const instance  = Axios.create({
-    timeout:5000,
+    // timeout:5000,
 })
 
 //请求拦截器
 instance.interceptors.request.use(config=>{
-    //
+    
     return config;
 },e=>{
     return Promise.reject(e)

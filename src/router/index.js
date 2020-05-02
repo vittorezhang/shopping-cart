@@ -33,6 +33,10 @@ const routes = [
     ]
   },
   {
+    path:'/details/:shopid',
+    component: () => import("../views/detail/detail.vue")
+  },
+  {
     path: '*',
     component: () => import("../views/err/err.vue"),
   }

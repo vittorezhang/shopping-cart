@@ -69,6 +69,9 @@ export default {
           this.finished = true;
         }
       }, 1000);
+    },
+    click(id) {
+      this.$router.push("/details/" + id);
     }
   },
 
@@ -92,7 +95,7 @@ export default {
   .nearby-businesses {
     margin-top: 10px;
   }
-  .brand{
+  .brand {
     background: orange;
   }
   .rating_fen {

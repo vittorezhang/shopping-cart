@@ -26,5 +26,6 @@ export default {
 @import url("../../assets/styles/global.less");
 .homePage-content {
   height: 100%;
+  overflow: scroll;
 }
 </style>

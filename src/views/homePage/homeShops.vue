@@ -1,83 +1,116 @@
 <template>
-  <van-swipe :loop="false" class="my-swipe" vertical>
-    <van-swipe-item v-for="value in shopList" :key="value.id">
-      <van-grid :icon-size="50" :border="false" square :column-num="4">
-        <van-grid-item v-for="value in shopList" :key="value.id" :icon="imgSrc+value.image_path"></van-grid-item>
-      </van-grid>
-    </van-swipe-item>
-  </van-swipe>
+  <div class="container">
+    <!-- 附近商家 -->
+    <van-cell icon="shop-o" title="附近商家" title-class="shop-title" class="nearby-businesses"></van-cell>
+    <!--附近商家列表 -->
+    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+      <van-card v-for="item in shopList" :key="item.id" @click="click(item.id)">
+        <template #thumb>
+          <van-image :src="imgSrc+item.license.catering_service_license_image" />
+        </template>
+        <!-- 商铺信息 -->
+        <template #title>
+          <div class="goods_box">
+            <div class="icon_left">
+              <van-tag class="brand">
+                <span style="color:#000">品牌</span>
+              </van-tag>
+              <span>{{item.description}}</span>
+            </div>
+            <p class="icon_right">
+              <van-tag plain v-for="v in item.supports" :key="v.id">{{v.icon_name}}</van-tag>
+            </p>
+          </div>
+        </template>
+        <template #tags>
+          <div class="goods_box">
+            <div class="icon_left">
+              <van-rate v-model="item.rating" :allow-half="true" disabled disabled-color="#FFD700" />
+              <span class="rating_fen">{{item.rating}}</span>
+              <span style="color:#aaa">月售{{item.recent_order_num}}单</span>
+            </div>
+            <p class="icon_right">
+              <van-tag type="primary">{{item.delivery_mode.text}}</van-tag>
+              <van-tag type="primary" plain>{{item.supports[1].name}}</van-tag>
+            </p>
+          </div>
+          <div class="goods_box">
+            <div
+              class="icon_left"
+            >￥{{item.float_minimum_order_amount}}起送/{{item.piecewise_agent_fee.tips}}</div>
+            <p class="icon_right">{{item.distance}} / {{item.order_lead_time}}</p>
+          </div>
+        </template>
+      </van-card>
+    </van-list>
+  </div>
 </template>
 
 <script>
-//引入商铺列表数据
+//引入商家列表数据
 import { shopListApi } from "../../request/index";
 export default {
   data() {
     return {
       shopList: [],
       //商家图片路径加上前缀http://kumanxuan1.f3322.net:8001/img/
-      imgSrc: "http://kumanxuan1.f3322.net:8001/img/"
+      imgSrc: "http://kumanxuan1.f3322.net:8001/img/",
+      loading: false,
+      finished: false
     };
   },
   methods: {
-    //获取用户定位
-    getLoaction() {
-      let _this = this;
-      var geolocation = new BMap.Geolocation();
-      //默认用户定位信息
-      let userLocationInfo = {
-        flag: false,
-        point: { lng: 116.483038, lat: 39.990633 }
-      };
-      console.log(userLocationInfo)
-      geolocation.getCurrentPosition(
-        function(loc) {
-          if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-            userLocationInfo = {
-              flag: true,
-              point: { lng: loc.point.lng, lat: loc.point.lat }
-            };
-             console.log(userLocationInfo)
-            //请求位置
-            shopListApi(
-              "latitude=" +
-                userLocationInfo.point.lat +
-                "&" +
-                "longitude=" +
-                userLocationInfo.point.lng
-            ).then(res => {
-              _this.shopList = res.data;
-              console.log(res.data);
-            });
-          } else {
-            shopListApi(userLocationInfo.lat, userLocationInfo.lng);
-          }
-        },
-        { enableHighAccuracy: true }
-      );
+    onLoad() {
+      // 异步更新数据
+      // setTimeout 仅做示例，真实场景中一般为 ajax 请求
+      setTimeout(() => {
+        // 数据全部加载完成
+        if (this.shopList.length >= 20) {
+          this.finished = true;
+        }
+      }, 1000);
     }
   },
 
   created() {
-    //实例已经创建完成之后调用getLoaction
-    this.getLoaction();
+    //实例已经创建完成之后调用shopListApi
+    shopListApi({
+      latitude: "23.128225",
+      longitude: "113.289752"
+    }).then(res => {
+      this.shopList = res.data;
+    });
   }
 };
 </script>
-
 <style lang='less' scoped>
-.my-swipe {
-  width: 100%;
-  height: 100%;
-  margin-top: 20px;
-  .van-swipe-item {
-    color: #fff;
-    font-size: 20px;
-    line-height: 150px;
-    text-align: center;
-    background-color: #fff;
-    height: 320px;
-    padding-bottom: 10px;
+.container {
+  .shop-title {
+    font-weight: 800;
+    color: #aaa;
+  }
+  .nearby-businesses {
+    margin-top: 10px;
+  }
+  .brand{
+    background: orange;
+  }
+  .rating_fen {
+    color: orange;
+    font-size: 26px;
+    font-weight: 800;
+  }
+  .goods_box {
+    overflow: hidden;
+    position: relative;
+    .icon_left {
+      display: inline-block;
+      position: absolute;
+      top: 25%;
+    }
+    .icon_right {
+      float: right;
+    }
   }
 }
 </style>

@@ -2,8 +2,7 @@
   <van-nav-bar
     class="headBar-wapper"
     :title="userLoaction"
-    @click-left="onClickLeft"
-    @click-right="onClickRight"
+ 
   >
     <template #left>
       <van-icon name="search" size="18" />
@@ -27,10 +26,7 @@ export default {
   },
 
   methods: {
-    onClickLeft() {
-      Toast("返回");
-    },
-    onClickRight() {},
+  
     //定位设置用户位置
     getLoaction() {
 

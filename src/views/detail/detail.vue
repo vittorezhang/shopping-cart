@@ -48,7 +48,6 @@
         <van-panel
           style="display:inline-block;width:80%;height:100vh;overflow-y:scroll;background:rgba(0,0,0,0)"
         >
-          <template #header></template>
           <!-- 商品 -->
           <van-card v-for="item in 20" :key="item">
             <template #thumb>
@@ -86,6 +85,11 @@
                 <div class="icon_right">
                   <van-stepper v-model="value" />
                 </div>
+                <!-- <div style="width:20px;height:10px;backgroud:purple">
+                  <van-sku
+                    v-model="show"
+                  />
+                </div> -->
               </div>
             </template>
           </van-card>
@@ -102,7 +106,9 @@ export default {
     return {
       imgSrc: "http://kumanxuan1.f3322.net:8001/img/",
       InfoList: [],
-      activeKey: 0
+      activeKey: 0,
+      value: 1,
+      // show:true
     };
   },
   created() {
@@ -131,5 +137,5 @@ export default {
 };
 </script>
 <style lang="less">
-@import url('../../assets/styles/detailPage.less');
+@import url("../../assets/styles/detailPage.less");
 </style>

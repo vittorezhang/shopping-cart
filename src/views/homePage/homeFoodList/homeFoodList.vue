@@ -9,8 +9,8 @@
 
 <script>
 import homeGrid from "./homeGrid";
-import { foodListApi } from "../../request/index";
-import Bus from "./bus";
+import { foodListApi } from "../../../request/index";
+import Bus from "../bus";
 export default {
   data() {
     return {

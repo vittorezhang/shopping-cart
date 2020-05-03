@@ -8,3 +8,6 @@ export const foodListApi = param => request.get("http://kumanxuan1.f3322.net:800
 
 //获取商铺列表
 export const storeListApi = param => request.get("http://kumanxuan1.f3322.net:8001/shopping/restaurants",{params:param})
+
+//获取商铺详细接口
+export const storeInfoApi = param => request.get("http://kumanxuan1.f3322.net:8001/shopping/restaurant/"+param)

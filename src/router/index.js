@@ -34,7 +34,7 @@ const routes = [
   },
 
   {
-    path: '/detail',
+    path: '/detail/:shopid',
     component: () => import("../views/detail/detail.vue"),
 
   },

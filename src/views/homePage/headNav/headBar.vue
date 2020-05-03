@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import { locationApi } from "../../request/index";
-import Bus from "./bus";
+import { locationApi } from "../../../request/index";
+import Bus from "../bus";
 export default {
   data() {
     return {
@@ -82,7 +82,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import url("../../assets/styles/global.less");
+@import url("../../../assets/styles/global.less");
 .headBar-wapper {
   height: 80px;
   line-height: 60px;

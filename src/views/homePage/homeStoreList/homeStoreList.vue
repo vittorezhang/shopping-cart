@@ -5,7 +5,7 @@
       <span>附近商家</span>
     </div>
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-      <van-cell v-for="item in storeList" :key="item.id" class="store-list-item">
+      <van-cell v-for="item in storeList" :key="item.id" :to="'/detail/'+item.id" class="store-list-item">
         <list-item-box :itemObj="item"></list-item-box>
       </van-cell>
     </van-list>
@@ -13,7 +13,8 @@
 </template>
 
 <script>
-import { storeListApi } from "../../request/index";
+import { storeListApi } from "../../../request/index";
+import Bus from "../bus";
 import listItemBox from "./soreListItem";
 export default {
   components: {
@@ -24,9 +25,26 @@ export default {
       storeList: [],
       loading: false,
       finished: false,
+      offset: 0,
+      limit: 10
     };
   },
   methods: {
+    sendApi(latitude, longitude) {
+      storeListApi({
+        latitude,
+        longitude,
+        offset: this.offset,
+        limit: this.limit
+      }).then(res => {
+        this.storeList = [...this.storeList, ...res.data];
+        this.loading = false;
+        this.offset = this.storeList.length;
+        if (this.storeList.length >= 53) {
+          this.finished = true;
+        }
+      });
+    },
     getData() {
       let that = this;
       var geolocation = new BMap.Geolocation();
@@ -42,45 +60,36 @@ export default {
               flag: true,
               point: { lng: r.point.lng, lat: r.point.lat }
             };
-            //请求位置
-            storeListApi({
-              latitude: userLocationInfo.point.lat.toFixed(6),
-              longitude: userLocationInfo.point.lng.toFixed(6)
-            }).then(res => {
-              console.log(res.data[0]);
+            // console.log(that.offset, that.limit);
 
-              that.storeList = res.data;
-              this.loading = false;
-              this.finished = true;
-            });
+            //请求位置
+            that.sendApi(
+              userLocationInfo.point.lat.toFixed(6),
+              userLocationInfo.point.lng.toFixed(6)
+            );
           } else {
-            storeListApi(userLocationInfo.lat, userLocationInfo.lng);
+            Toast("获取定位失败,请检查");
+            that.sendApi(
+              userLocationInfo.lat.toFixed(6),
+              userLocationInfo.lng.toFixed(6)
+            );
           }
         },
         { enableHighAccuracy: true }
       );
     },
     onLoad() {
+      // console.log(123456);
       // 异步更新数据
       this.getData();
-      // setTimeout 仅做示例，真实场景中一般为 ajax 请求
-      // setTimeout(() => {
-      //   for (let i = 0; i < 10; i++) {
-      //     this.list.push(this.list.length + 1);
-      //   }
-
-      //   // 加载状态结束
-      //   this.loading = false;
-
-      //   // 数据全部加载完成
-      //   if (this.list.length >= 40) {
-      //     this.finished = true;
-      //   }
-      // }, 1000);
     }
   },
   created() {
-    // this.getData();
+    let that = this;
+    Bus.$on("my-refresh", function() {
+      that.storeList = [];
+      that.getData();
+    });
   }
 };
 </script>
@@ -91,10 +100,11 @@ export default {
   margin-bottom: 100px;
   .list-title {
     height: 40px;
-    line-height: 30px;
+    line-height: 40px;
     background: #fff;
     font-size: 20px;
     padding-left: 20px;
+    color: #999;
     .van-icon {
       font-size: 24px;
       vertical-align: text-bottom;
@@ -102,10 +112,9 @@ export default {
     span {
       margin-left: 10px;
     }
-    
   }
-  .store-list-item{
-      padding: 10px 10px;
-    }
+  .store-list-item {
+    padding: 10px 10px;
+  }
 }
 </style>

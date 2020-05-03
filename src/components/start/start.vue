@@ -25,7 +25,7 @@ export default {
     //获取星星数
     // 4 7  -> 94
     this.startLength = this.startNum * 2 * 10;
-    console.log(this.startLength);
+    // console.log(this.startLength);
 
     // this.setStartArr(this.startNum);
   }

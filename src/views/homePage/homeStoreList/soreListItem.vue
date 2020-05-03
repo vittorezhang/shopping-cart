@@ -21,12 +21,15 @@
       <div class="flex-row serve-row">
         <div>
           <my-start class="start-box" :startNum="itemObj.rating"></my-start>
-          <span class="rating"> {{itemObj.rating}} </span>
+          <span class="rating">{{itemObj.rating}}</span>
           <span class="order-sell">月售{{itemObj.recent_order_num}}单</span>
         </div>
         <div>
           <span class="delivery-mode" v-if="itemObj.delivery_mode">{{itemObj.delivery_mode.text}}</span>
-          <span class="support-serve" v-if="itemObj.supports[1]">{{itemObj.supports[1].name}}</span>
+          <span
+            class="support-serve"
+            v-if="itemObj.supports[1].icon_name=='准'"
+          >{{itemObj.supports[1].name}}</span>
         </div>
       </div>
       <div class="flex-row info-row">
@@ -41,7 +44,7 @@
 </template>
 
 <script>
-import myStart from "../../components/start/start";
+import myStart from "../../../components/start/start";
 export default {
   props: {
     itemObj: {
@@ -51,19 +54,19 @@ export default {
       }
     }
   },
-  components: {
-    myStart
-  },
   data() {
     return {
       imgSrc: "http://kumanxuan1.f3322.net:8001/img/"
     };
+  },
+  components: {
+    myStart
   }
 };
 </script>
 
 <style lang="less" scoped>
-@import url("../../assets/styles/global.less");
+@import url("../../../assets/styles/global.less");
 
 .home-list-item {
   height: 150px;

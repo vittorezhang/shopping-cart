@@ -9,5 +9,12 @@ export const getList = data =>request.get(API + "/index_entry");
 
 // 获取附近商品
 export const getGoods = data =>request.get(goodsAPi+"/restaurants",{params:data});
+
 // 获取商家信息
 export const getStore = data =>request.get(goodsAPi + "/restaurant/"+ data.shopid);
+
+// 获取商家的商品信息
+export const getGoodsInfo = data =>request.get(goodsAPi + "/v2/menu",{params:data});
+
+// 获取评价信息
+export const getEvaluate= data =>request.get(`http://kumanxuan1.f3322.net:8001/ugc/v2/restaurants/${data.restaurant_id}/ratings/scores`);

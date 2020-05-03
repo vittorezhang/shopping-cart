@@ -14,7 +14,10 @@ module.exports = {
   },
   // devServer: {
   //     proxy: {
-          
+  //       // 以/v2开头的接口
+  //         '^/v2':{
+  //         target:"http://kumanxuan1.f3322.net:8001"
+  //         }
   //     }
   // }
 };

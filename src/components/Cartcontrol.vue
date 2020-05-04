@@ -34,6 +34,7 @@ export default {
         decreaseCart(){
             if(this.food.__v){
                 this.food.__v--;
+                console.log(this.food)
                 this.$emit('cartInfo',{food:this.food});
             }
         }

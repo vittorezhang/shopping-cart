@@ -260,7 +260,8 @@ export default {
 
         let index = this.cartList.indexOf(info);
           if(this.cartList.includes(info)){
-            this.cartList[index].__v = info.__v;
+            this.$set(this.cartList[index], '__v', info.__v);
+            // this.cartList[index].__v = info.__v;
           }else{
             this.cartList.push(info);
           }
@@ -275,7 +276,10 @@ export default {
       });
       this.cart_count = num;
       this.cart_price = sum;
-
+      this.$set(this, 'cartList',this.cartList);
+      
+      console.log(this.cart_count,this.cart_price)
+      console.log(this.cartList)
     },
     // 清空购物车
     emptyCart(){

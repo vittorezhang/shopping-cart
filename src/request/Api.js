@@ -18,3 +18,10 @@ export const getGoodsInfo = data =>request.get(goodsAPi + "/v2/menu",{params:dat
 
 // 获取评价信息
 export const getEvaluate= data =>request.get(`http://kumanxuan1.f3322.net:8001/ugc/v2/restaurants/${data.restaurant_id}/ratings/scores`);
+
+// 获取评价分类
+export const getComment =data => request.get(`http://kumanxuan1.f3322.net:8001/ugc/v2/restaurants/${data.restaurant_id}/ratings/tags`)
+
+// 获取评论列表
+export const getCommentList =data => request.get(`http://kumanxuan1.f3322.net:8001/ugc/v2/restaurants/${data.restaurant_id}/ratings`,{params:{offset:data.offset,limit:data.limit}})
+

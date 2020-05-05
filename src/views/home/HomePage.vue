@@ -1,7 +1,7 @@
 <template>
 <div class="home">
   <router-view />
-<van-tabbar class="Nav" route fixed :border="bool"	>
+<van-tabbar class="Nav" route :fixed="fixeds" :border="bool"	>
   <van-tabbar-item replace to="/takeaway" icon="home-o" size="40">
     外卖
   </van-tabbar-item>
@@ -22,18 +22,37 @@ export default {
   data(){
     return{
       bool:true,
+      fixeds:true,
     }
+  },
+  methods:{
+    routerPush(){
+    this.$router.replace('/takeaway');
+
+      // this.$router.push({  //核心语句
+      //   path:'/takeaway',   //跳转的路径
+      // })
+    }
+  },
+  created() {
+    // this.routerPush()
   }
   
 }
 </script>
 
-<style lang='less' scoped>
-.home {
-  height: 100%;
-}
+<style>
+/* @import '../../assets/less'; */
+ .home {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+ }
 .Nav {
   padding-top: 10px;
   padding-bottom: 10px;
+  position: fixed;
+  bottom: 0px;
 }
 </style>

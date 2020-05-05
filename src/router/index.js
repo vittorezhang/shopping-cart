@@ -24,8 +24,23 @@ Vue.use(VueRouter)
           path: "/me",
           component:() => import(/* webpackChunkName: "me" */ '../views/me/Me.vue')
         },
-      ]
+      ],
     },
+        {
+          path: "/detail/:ids",
+          component:() => import(/* webpackChunkName: "detail" */ '../views/detail/Detail.vue'),
+          children:[
+            {
+              path: "/productList",
+              component:() => import(/* webpackChunkName: "productList" */ '../views/takeaway/productList/ProductList.vue')
+            },
+            {
+              path: "/evaluation",
+              component:() => import(/* webpackChunkName: "evaluation" */ '../views/takeaway/evaluation/Evaluation.vue')
+            },
+            
+          ],
+        },
 ]
 
 const router = new VueRouter({

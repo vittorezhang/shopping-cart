@@ -8,6 +8,10 @@ Vue.use(VueRouter)
     {
       path: '/index',
       component: () => import(/* webpackChunkName: "index" */ '../views/index/Index.vue')
+    },
+    {
+      path: '/detail',
+      component: () => import(/* webpackChunkName: "detail" */ '../views/detail/Detail.vue')
     }
   
   ]

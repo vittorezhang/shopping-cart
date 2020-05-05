@@ -109,7 +109,7 @@
   </div>
 </template>
 <script>
-import { getStore } from "../request/Api.js";
+import { getStore,get1,get2 } from "../request/Api.js";
 import {data} from '../assets/data';
 export default {
   
@@ -125,6 +125,12 @@ export default {
     };
   },
   created() {
+    get1({restaurant_id:1}).then(res=>{
+      console.log(res);
+    })
+    get2().then(res=>{
+      console.log(res);
+    })
     let { shopid } = this.$route.params;
     getStore({ shopid }).then(res => {
       if (res.status == 200) {

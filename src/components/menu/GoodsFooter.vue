@@ -16,7 +16,7 @@
     <div
       class="right"
       @click="out"
-      :style="cart_price > 20?'background:limegreen':'background:#ccc'"
+      :style="cart_price > 0?'background:limegreen':'background:#ccc'"
     >去结算</div>
   </van-tabbar>
 </template>

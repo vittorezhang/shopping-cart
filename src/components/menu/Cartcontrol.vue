@@ -70,7 +70,7 @@ export default {
   }
   .cart-decrease {
     color: #fff;
-    animation: myfirst 1.5s;
+    animation: myfirst .1s;
     .inner {
       line-height: 26px;
       background: rgb(25, 137, 250);

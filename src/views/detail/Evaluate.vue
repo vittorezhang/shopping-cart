@@ -31,14 +31,45 @@
       <van-tag
         v-for="item in EvaluateCategoryInfo"
         :key="item._id"
+        :color="item.unsatisfied?'#4999fa':'lightblue'"
+        @click="click(item)"
         class="EvaluateCategoryItem"
       >{{`${item.name + '(' + item.count + ')'}`}}</van-tag>
+    </div>
+    <!-- 评价信息列表 -->
+    <div class="EvaluateInfoList" v-for="item in EvaluateInfoList" :key="item._id">
+      <div class="EvaluateInfoList_left">
+        <van-image width="80px" height="50px" :src="require('../../assets/star1.jpg')" />
+      </div>
+      <div class="EvaluateInfoList_right">
+        <div class="right_title">
+          {{item.username}}
+          <span>{{item.rated_at}}</span>
+        </div>
+        <div>
+          <van-rate v-model="item.rating_star" disabled disabled-color="orange" />
+          {{item.time_spent_desc}}
+        </div>
+        <div>
+          <van-image width="80px" height="60px" :src="require('../../assets/star1.jpg')" />
+          <van-image width="80px" height="60px" :src="require('../../assets/star1.jpg')" />
+        </div>
+        <div>
+          <div class="tag_box" v-for="v in item.item_ratings" :key="v._id">
+            <van-tag plain>{{v.food_name}}</van-tag>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { EvaluateApi, EvaluateCategoryApi } from "../../request/index";
+import {
+  EvaluateApi,
+  EvaluateCategoryApi,
+  CommentListApi
+} from "../../request/index";
 export default {
   //接收父组件传递过来的属性
   props: {
@@ -49,7 +80,8 @@ export default {
   data() {
     return {
       EvaluateInfo: {},
-      EvaluateCategoryInfo: []
+      EvaluateCategoryInfo: [],
+      EvaluateInfoList: []
     };
   },
   created() {
@@ -59,12 +91,48 @@ export default {
     });
     EvaluateCategoryApi({ restaurant_id: this.shop_id }).then(res => {
       this.EvaluateCategoryInfo = res.data;
-      console.log(res.data);
+      // console.log(res.data);
+    });
+    CommentListApi({
+      restaurant_id: this.shop_id,
+      offset: 10,
+      limit: 10
+    }).then(res => {
+      this.EvaluateInfoList = res.data;
     });
   },
   filters: {
     getFolter(value) {
       return parseFloat(value).toFixed(1);
+    }
+  },
+  methods: {
+    click(item) {
+      // console.log(item);
+      this.EvaluateCategoryInfo.map(itemChild => {
+        itemChild.unsatisfied = false;
+        // console.log(itemChild);
+      });
+      item.unsatisfied = true;
+      // 获取对应offset的评论数据
+      this.getInfo();
+    },
+    // 获取对应offset的评论数据
+    getInfo() {
+      let index;
+      this.EvaluateCategoryInfo.map(item => {
+        if (item.unsatisfied == true) {
+          index = this.EvaluateCategoryInfo.indexOf(item);
+        }
+      });
+      // console.log(index);
+      CommentListApi({
+        restaurant_id: this.shop_id,
+        offset: index * 10,
+        limit: 10
+      }).then(res => {
+        this.EvaluateInfoList = res.data;
+      });
     }
   }
 };
@@ -111,6 +179,41 @@ export default {
     margin-left: 50px;
     font-size: 24px;
     font-weight: bold;
+  }
+}
+.EvaluateInfoList {
+  border-top: 0.5px solid #ccc;
+  padding: 10px 20px;
+  background: #fff;
+  display: flex;
+  .EvaluateInfoList_left {
+    flex: 1;
+  }
+  .EvaluateInfoList_right {
+    flex: 5;
+    .right_title {
+      padding: 5px 0;
+      span {
+        float: right;
+        color: #aaa;
+        font-size: 20px;
+      }
+    }
+    .van-image {
+      margin-right: 10px;
+    }
+    .tag_box {
+      display: inline-block;
+      margin-right: 10px;
+    }
+    .van-tag.van-tag--plain.van-tag--default.van-hairline--surround {
+      width: 68px;
+      overflow: hidden;
+      text-overflow: ellipsis; /*表示文本超出时候用 “...” 来代替*/
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1; // 几行
+    }
   }
 }
 </style>

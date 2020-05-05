@@ -1,6 +1,6 @@
 <template>
-  <div class="errPage">
-    <a href="/">您的页面跑丢了，可以点击返回首页哦</a>
+  <div class="homePage-content">
+    <a href="/" class="text">您的页面跑丢了，可以点击返回首页哦</a>
   </div>
 </template>
 
@@ -9,11 +9,14 @@ export default {};
 </script>
 
 <style lang='less' scoped>
-.errPage {
-  width: 214px;
-  margin: 500px auto;
-  a {
+@import url("../../assets/styles/global.less");
+.homePage-content {
+  height: 100%;
+  width: 100%;
+  overflow: scroll;
+  .text {
     color: black;
+    font-weight: bold;
   }
 }
 </style>

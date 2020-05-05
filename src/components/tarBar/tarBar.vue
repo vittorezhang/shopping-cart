@@ -14,7 +14,7 @@
       to="/home/search"
       icon-prefix="icon"
       name="search"
-      icon="compass"
+      icon="zhinanzhen"
     >搜索</van-tabbar-item>
     <van-tabbar-item
       replace
@@ -22,7 +22,7 @@
       to="/home/order"
       icon-prefix="icon"
       name="order"
-      icon="order"
+      icon="dingdan"
     >订单</van-tabbar-item>
     <van-tabbar-item
       replace

@@ -1,37 +1,51 @@
 {
-  "id": "1787342",
-  "name": "ele",
+  "id": "1797594",
+  "name": "vue移动端",
   "font_family": "iconfont",
   "css_prefix_text": "icon-",
   "description": "",
   "glyphs": [
     {
-      "icon_id": "2488921",
+      "icon_id": "5672453",
+      "name": "加号",
+      "font_class": "jiahao",
+      "unicode": "e729",
+      "unicode_decimal": 59177
+    },
+    {
+      "icon_id": "5672450",
+      "name": "减号",
+      "font_class": "jianhao",
+      "unicode": "e728",
+      "unicode_decimal": 59176
+    },
+    {
+      "icon_id": "2170947",
+      "name": "我的",
+      "font_class": "wode",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "5360119",
+      "name": "订单",
+      "font_class": "dingdan",
+      "unicode": "e62a",
+      "unicode_decimal": 58922
+    },
+    {
+      "icon_id": "11748355",
+      "name": "指南针",
+      "font_class": "zhinanzhen",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "13519391",
       "name": "eleme",
       "font_class": "eleme",
-      "unicode": "e61e",
-      "unicode_decimal": 58910
-    },
-    {
-      "icon_id": "4105777",
-      "name": "指南针",
-      "font_class": "compass",
-      "unicode": "e659",
-      "unicode_decimal": 58969
-    },
-    {
-      "icon_id": "9920450",
-      "name": "我 的",
-      "font_class": "wode",
-      "unicode": "e61f",
-      "unicode_decimal": 58911
-    },
-    {
-      "icon_id": "9938413",
-      "name": "订单",
-      "font_class": "icon-",
-      "unicode": "e600",
-      "unicode_decimal": 58880
+      "unicode": "e652",
+      "unicode_decimal": 58962
     }
   ]
 }

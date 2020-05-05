@@ -12,7 +12,7 @@
 import HeadNav from "./headNav/headBar";
 import HomeFoodList from "./homeFoodList/homeFoodList";
 import HomeStoreList from "./homeStoreList/homeStoreList"
-import Bus from "./bus";
+import Bus from "../../plugin/bus"
 export default {
   data() {
     return {

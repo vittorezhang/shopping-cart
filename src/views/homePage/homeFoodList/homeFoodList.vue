@@ -10,7 +10,7 @@
 <script>
 import homeGrid from "./homeGrid";
 import { foodListApi } from "../../../request/index";
-import Bus from "../bus";
+import Bus from "../../../plugin/bus";
 export default {
   data() {
     return {

@@ -1,10 +1,13 @@
 <template>
   <div
+    ref="getHeight"
     class="detail-store-info"
     v-if="storeDeatail.image_path"
     :style="`background:url('http://kumanxuan1.f3322.net:8001/img/${storeDeatail.image_path}') 0 0 no-repeat`"
   >
     <div class="tran-box">
+      <van-icon class="left-arrow" @click="backHandle" name="arrow-left" />
+
       <div class="store-info-box">
         <div class="banner-box">
           <img
@@ -53,35 +56,52 @@
 
 <script>
 import { storeInfoApi } from "../../request/index";
-
+import Bus from "../../plugin/bus";
 export default {
   data() {
     return {
       storeDeatail: {},
-      imgSrc: "http://kumanxuan1.f3322.net:8001/img/"
+      imgSrc: "http://kumanxuan1.f3322.net:8001/img/",
+      storeInfoHeight:0
     };
   },
   methods: {
+    backHandle() {
+      this.$router.back();
+    },
     getData() {
       storeInfoApi(this.$route.params.shopid).then(res => {
         //   console.log(res.data);
         this.storeDeatail = res.data;
+        //回调里面获取高度
+        this.$nextTick(() => {
+          // 页面渲染完成后的回调
+          
+          this.storeInfoHeight = this.$refs.getHeight.offsetHeight
+          Bus.$emit("getTopHeight",this.$refs.getHeight.offsetHeight)
+        });
       });
     }
   },
   created() {
     this.getData();
-  }
+  },
 };
 </script>
 
 <style lang="less" scoped>
 .detail-store-info {
   height: 100%;
-  box-sizing: content-box;
+  .left-arrow {
+    font-weight: 800;
+    font-size: 18px; /*no */
+    color: #fff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
   .tran-box {
-    padding: 10px 20px;
     height: 100%;
+    padding: 0 20px;
     background-color: rgba(210, 210, 210, 0.8);
     .store-info-box {
       display: flex;

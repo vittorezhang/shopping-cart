@@ -17,7 +17,7 @@
 
 <script>
 import { locationApi } from "../../../request/index";
-import Bus from "../bus";
+import Bus from "../../../plugin/bus";
 export default {
   data() {
     return {

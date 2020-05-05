@@ -14,7 +14,7 @@
 
 <script>
 import { storeListApi } from "../../../request/index";
-import Bus from "../bus";
+import Bus from "../../../plugin/bus";
 import listItemBox from "./soreListItem";
 export default {
   components: {

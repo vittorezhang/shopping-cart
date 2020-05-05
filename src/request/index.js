@@ -10,4 +10,12 @@ export const foodListApi = param => request.get("http://kumanxuan1.f3322.net:800
 export const storeListApi = param => request.get("http://kumanxuan1.f3322.net:8001/shopping/restaurants",{params:param})
 
 //获取商铺详细接口
-export const storeInfoApi = param => request.get("http://kumanxuan1.f3322.net:8001/shopping/restaurant/"+param)
+export const storeInfoApi = param => request.get("http://kumanxuan1.f3322.net:8001/shopping/restaurant/"+param);
+
+//获取店铺食品列表API
+export const storeFoodListApi = param => request.get("http://kumanxuan1.f3322.net:8001/shopping/v2/menu",{params:param})
+
+//获取评分API
+export const foodStartApi = param => request.get(`http://kumanxuan1.f3322.net:8001/ugc/v2/restaurants/${param}`)
+//获取评论列表
+export const commentListApi = ({url,option}) => request.get(`http://kumanxuan1.f3322.net:8001/ugc/v2/restaurants/${url}`,{params:option})

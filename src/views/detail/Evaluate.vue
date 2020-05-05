@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 评价分数 -->
     <div class="evaluate">
       <div class="eva_left">
         <p>{{EvaluateInfo.food_score | getFolter}}</p>
@@ -25,11 +26,19 @@
         </p>
       </div>
     </div>
+    <!-- 评价分类 -->
+    <div class="EvaluateCategory">
+      <van-tag
+        v-for="item in EvaluateCategoryInfo"
+        :key="item._id"
+        class="EvaluateCategoryItem"
+      >{{`${item.name + '(' + item.count + ')'}`}}</van-tag>
+    </div>
   </div>
 </template>
 
 <script>
-import { EvaluateApi } from "../../request/index";
+import { EvaluateApi, EvaluateCategoryApi } from "../../request/index";
 export default {
   //接收父组件传递过来的属性
   props: {
@@ -39,13 +48,18 @@ export default {
   },
   data() {
     return {
-      EvaluateInfo: {}
+      EvaluateInfo: {},
+      EvaluateCategoryInfo: []
     };
   },
   created() {
     EvaluateApi({ restaurant_id: this.shop_id }).then(res => {
       this.EvaluateInfo = res.data;
       // console.log(res.data)
+    });
+    EvaluateCategoryApi({ restaurant_id: this.shop_id }).then(res => {
+      this.EvaluateCategoryInfo = res.data;
+      console.log(res.data);
     });
   },
   filters: {
@@ -88,6 +102,15 @@ export default {
         color: orange;
       }
     }
+  }
+}
+.EvaluateCategory {
+  background: #fff;
+  margin-top: 20px;
+  .EvaluateCategoryItem {
+    margin-left: 50px;
+    font-size: 24px;
+    font-weight: bold;
   }
 }
 </style>

@@ -10,5 +10,7 @@ export const shopListApi = param => { return request.get("http://kumanxuan1.f332
 export const shopImformationApi = param => { return request.get("http://kumanxuan1.f3322.net:8001/shopping/restaurant/" + param.shopid) };
 //请求商家的食品列表数据
 export const GoodsImformationApi = param => { return request.get("http://kumanxuan1.f3322.net:8001/shopping/v2/menu", { params: param }) };
-//请求评价信息数据
+//请求评价分数数据
 export const EvaluateApi = param => { return request.get(`http://kumanxuan1.f3322.net:8001/ugc/v2/restaurants/${param.restaurant_id}/ratings/scores`) };
+//请求评价分类数据
+export const EvaluateCategoryApi = param => { return request.get(`http://kumanxuan1.f3322.net:8001/ugc/v2/restaurants/${param.restaurant_id}/ratings/tags`) };

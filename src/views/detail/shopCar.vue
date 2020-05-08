@@ -18,11 +18,16 @@
         <div class="title-row">
           <span>购物车</span>
           <span class="temp">
-            <van-icon name="delete" class="delete-icon" />清空
+            <van-icon name="delete" @click="celanHandle()" class="delete-icon" />清空
           </span>
         </div>
         <div class="content-row">
-          <div class="content-item-row" v-for="item in shopList" :key="item.foodsId">
+          <van-empty v-if="shopList.length == 0" description="购物车是空的" />
+          <div
+            class="content-item-row"
+            v-for="(item,index) in shopList"
+            :key="item.foodsId+item.specFoods._id"
+          >
             <div class="name-box">
               <p class="name">{{item.name}}</p>
               <p class="type" v-if="item.specFoods">{{item.specFoods.specs_name}}</p>
@@ -32,7 +37,7 @@
               v-if="item.specFoods"
             >&yen;{{item.specFoods.price*item[item.foodsId]}}</span>
             <div class="button-box">
-              <van-button size="small" @click="(e)=>{cutHandle(item)}" round plain>-</van-button>
+              <van-button size="small" @click="(e)=>{cutHandle(item,index)}" round plain>-</van-button>
               <span class="goods-num">{{item[item.foodsId]}}</span>
               <button @click="(e)=>{addHandle(item)}" class="plus-button">+</button>
             </div>
@@ -60,25 +65,40 @@ export default {
     clickHandle() {
       let shopArr = [];
       let dotNum = 0;
+      //获取当前选中信息
       this.$store.state.goodList.map(item => {
-        if (item.restaurant_id == this.$route.params.shopid) {
+        if (
+          item.restaurant_id == this.$route.params.shopid &&
+          item[item.foodsId] != 0
+        ) {
           shopArr.push(item);
-          console.log(item[item.foodsId]);
+
           dotNum += item[item.foodsId];
         }
       });
       this.shopList = shopArr;
       this.showCar = !this.showCar;
       this.dotNum = dotNum;
-      console.log(this.shopList);
+      // console.log(this.shopList);
     },
-    //减少商品数量
-    cutHandle(item) {
+    //减少商品数量--购物车删除内容
+    cutHandle(item, index) {
       this.$store.dispatch("cutGoodsAction", item);
+      console.log(item);
+      //item.foodsId+item.specFoods._id
+      //数量为0，在数组中删除这个元素
+      let shopList = this.shopList;
+      if (item[item.foodsId] == 0) {
+        shopList.splice(index, 1);
+      }
     },
     //添加商品数量
     addHandle(item) {
       this.$store.dispatch("addGoodsAction", item);
+    },
+    celanHandle(){    
+      this.$store.dispatch("clearGoodsAction", this.$route.params.shopid);
+      this.shopList = [];
     }
   },
   filters: {
@@ -94,17 +114,16 @@ export default {
       return shopPrice;
     },
     shopDotNum(array) {
-    let dotNum = 0;
-    that.$store.state.goodList.map(item => {
-      if (item.restaurant_id == that.$route.params.shopid) {
-        dotNum += item[item.foodsId];
-      }
-    });
-    that.dotNum = dotNum;
-    return dotNum;
+      let dotNum = 0;
+      that.$store.state.goodList.map(item => {
+        if (item.restaurant_id == that.$route.params.shopid) {
+          dotNum += item[item.foodsId];
+        }
+      });
+      that.dotNum = dotNum;
+      return dotNum;
+    }
   }
-  },
-  
 };
 </script>
 
@@ -247,6 +266,9 @@ export default {
           margin: 0 10px;
         }
       }
+    }
+    .van-empty {
+      background: #fff;
     }
   }
 }

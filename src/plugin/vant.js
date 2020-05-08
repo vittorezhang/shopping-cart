@@ -1,3 +1,3 @@
 import Vue from "vue";
-import {Button,Tabbar,TabbarItem,NavBar,Icon,Swipe,SwipeItem,Grid,GridItem,Image,PullRefresh,Toast, List,Cell,Tab,Tabs ,Sidebar,SidebarItem,Card,Tag,Sticky,DropdownMenu,DropdownItem,Overlay,Dialog} from "vant";
-Vue.use(Button).use(Tabbar).use(TabbarItem).use(NavBar).use(Icon).use(Swipe).use(SwipeItem).use(Grid).use(GridItem).use(Image).use(PullRefresh).use(Toast).use(List).use(Cell).use(Tab).use(Tabs).use(Sidebar).use(SidebarItem).use(Card).use(Tag).use(Sticky).use(DropdownMenu).use(DropdownItem).use(Overlay).use(Dialog);
+import {Button,Tabbar,TabbarItem,NavBar,Icon,Swipe,SwipeItem,Grid,GridItem,Image,PullRefresh,Toast, List,Cell,Tab,Tabs ,Sidebar,SidebarItem,Card,Tag,Sticky,DropdownMenu,DropdownItem,Overlay,Dialog,Empty} from "vant";
+Vue.use(Button).use(Tabbar).use(TabbarItem).use(NavBar).use(Icon).use(Swipe).use(SwipeItem).use(Grid).use(GridItem).use(Image).use(PullRefresh).use(Toast).use(List).use(Cell).use(Tab).use(Tabs).use(Sidebar).use(SidebarItem).use(Card).use(Tag).use(Sticky).use(DropdownMenu).use(DropdownItem).use(Overlay).use(Dialog).use(Empty);

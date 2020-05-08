@@ -14,10 +14,8 @@
         </div>
       </div>
       <div class="serve-row">
-  
-          <my-start class="start-box" :startNum="itemObj.rating_star"></my-start>
-          <span class="order-sell">{{itemObj.time_spent_desc}}</span>
-    
+        <my-start class="start-box" :startNum="itemObj.rating_star"></my-start>
+        <span class="order-sell">{{itemObj.time_spent_desc}}</span>
       </div>
       <div class="info-row">
         <div class="info-distance">
@@ -28,7 +26,12 @@
             alt
           />
         </div>
-        <van-tag v-for="items in itemObj.item_ratings" :key="items._id" plain>{{items.food_name}}</van-tag>
+        <span
+          v-for="items in itemObj.item_ratings"
+          class="commint-tags"
+          :key="items._id"
+          plain
+        >{{items.food_name}}</span>
       </div>
     </div>
   </div>
@@ -83,15 +86,31 @@ export default {
     }
     .serve-row {
       width: 100%;
-    //   display: flex;
-    //   flex-direction: row;
       font-size: 12px; /*no */
-    //   justify-content: flex-start;
       .start-box {
-          width: 100px;
+        width: 100px;
         height: 20px;
         display: inline-block;
         margin-right: 10px;
+      }
+    }
+    .info-row {
+      .info-distance{
+      margin-bottom: 10px;
+      }
+      .commint-tags {
+        color: #999;
+        padding: 0 5px;
+        border: 1px solid #999;
+        font-size: 12px;/*no */
+        display: inline-block;
+        width: 80px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        margin: 0 5px;
+        margin-top: 10px;
+
       }
     }
   }

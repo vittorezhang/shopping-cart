@@ -2,6 +2,7 @@
   <div class="home-list-item">
     <div class="left-box">
       <img :src="imgSrc+itemObj.image_path" alt />
+      <div v-show="seleNum!=0" class="count-num">{{seleNum}}</div>
     </div>
     <div class="right-box">
       <div class="flex-row title-row">
@@ -56,11 +57,25 @@ export default {
   },
   data() {
     return {
-      imgSrc: "http://kumanxuan1.f3322.net:8001/img/"
+      imgSrc: "http://kumanxuan1.f3322.net:8001/img/",
+      seleNum:0
     };
   },
   components: {
     myStart
+  },
+  created(){
+    // console.log(this.itemObj);
+    // console.log(this.$store.state.goodList.restaurant_id);
+    let count = 0
+    this.$store.state.goodList.map(item=>{
+     console.log(item[item.foodsId]);
+     
+     if(item.restaurant_id== this.itemObj.id){
+        count += item[item.foodsId]
+      }
+    })
+    this.seleNum=count;
   }
 };
 </script>
@@ -72,11 +87,27 @@ export default {
   height: 150px;
   display: flex;
   flex-direction: row;
+
   .left-box {
     height: 100%;
+    position: relative;
     img {
       height: 150px;
       width: 150px;
+    }
+    .count-num{
+      width: 30px;
+      height: 30px;
+      background: red;
+      position: absolute;
+      border: 5px solid #fff;/*no */
+      top: -15px;
+      right: -15px;
+      color: #fff;
+      font-weight: 800;
+      text-align: center;
+      line-height: 30px;
+      border-radius: 50%;
     }
   }
   .right-box {

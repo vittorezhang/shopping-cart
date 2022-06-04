@@ -1,5 +1,8 @@
 <template>
-  <div>欢迎来到我的页面</div>
+  <div>
+		欢迎来到我的页面
+		<p>test import resposity in github</p>
+	</div>
 </template>
 
 <script>
